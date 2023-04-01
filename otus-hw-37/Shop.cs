@@ -12,8 +12,8 @@ namespace otus_hw_37
     public class Shop
     {
         public ObservableCollection<Item> Goods = new ObservableCollection<Item>();
-                      
-
+        
+        
         public void Add (Item item)
         {
         Goods.Add (item);

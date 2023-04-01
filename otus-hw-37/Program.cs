@@ -1,43 +1,34 @@
 ﻿using otus_hw_37;
+using System.Threading.Tasks.Dataflow;
 
 Console.WriteLine("Hello, World!");
-int IdItem = 0;
 
-Customer oleg = new Customer();
-Shop shop = new Shop();
-
-shop.Goods.CollectionChanged += oleg.OnItemChanged;
+MyLibrary MySummerLibrary = new MyLibrary();
 
 
 
 while (true)
 {
-    Console.WriteLine("Ваши действия: А - добавить товар, D - удалить товар, Х - выйти из программы");
+    Console.WriteLine("Ваши действия: 1 - добавить книгу; 2 - вывести список непрочитанного; 3 - выйти");
 
     var act = Console.ReadLine();
 
 
-    if (act == "A")
+    if (act == "1")
     {
-        Item newItem = new Item(IdItem, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-        shop.Add(newItem);
-        IdItem++;
+        
+        Console.WriteLine("Введите название книги");
+        string Name = Console.ReadLine();
+        MySummerLibrary.AddBook(Name);
 
     }
-    else if (act == "D")
+    else if (act == "2")
     {
-        Console.WriteLine("Товар с каким ID удалить ?");
-        string? input = Console.ReadLine();
-        bool result = int.TryParse(input, out var number);
-        if (result == true)
-            shop.Remove(number);
-        else
-            Console.WriteLine("Надо ввести ID в виде цифры");
-
+        MySummerLibrary.GetBooks();        
     }
 
 
-    else if (act == "X")
+    else if (act == "3")
 
     {
         break;

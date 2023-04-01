@@ -16,7 +16,10 @@ namespace otus_hw_37
 
         public ConcurrentDictionary<string, int> Library = new ConcurrentDictionary<string, int>();
 
-         public void AddBook (string name)
+        
+        int milliseconds = 1000;
+        
+        public void AddBook (string name)
 
         {
 
@@ -25,13 +28,26 @@ namespace otus_hw_37
                 Library.TryAdd(name, 0);
             }
 
+            Task.Run(() =>
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    Thread.Sleep(milliseconds);
+                    Library[name] = i;
+                }
+                var gg = Library[name];
+                Library.Remove(name, out gg);
+                             
+            });
+
+
         }
        
-        public void GetBooks()
+        public void GetBooks() 
         {
 
             foreach (var book in Library)
-            Console.WriteLine($"Название - {book.Key}, прочитано  {book.Value}" );
+            Console.WriteLine($"Название - {book.Key}, прочитано  {book.Value} %" );
 
         }
 
